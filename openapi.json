@@ -22,7 +22,7 @@
                                 "2"
                             ]
                         },
-                        "description": "API version number (e.g., `1` for v1, `2` for v2)"
+                        "description": "API version number (e.g., `1` for v1, `2` for v2). Defaults to `1`."
                     }
                 ],
                 "requestBody": {
