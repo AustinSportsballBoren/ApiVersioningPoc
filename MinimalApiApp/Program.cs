@@ -4,10 +4,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApiVersioning(options =>
 {
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.DefaultApiVersion = new ApiVersion(1, 0);
-    options.ReportApiVersions = true;
-    options.ApiVersionReader = new QueryStringApiVersionReader("api-version");
+  options.AssumeDefaultVersionWhenUnspecified = true;
+  options.DefaultApiVersion = new ApiVersion(1, 0);
+  options.ReportApiVersions = true;
 });
 
 var app = builder.Build();
@@ -27,14 +26,13 @@ app.MapPost("/hello-world", (v2Request request) => Results.Json(request))
 
 app.Run();
 
-
 class v1Request
 {
-    public string Name { get; set; } = string.Empty;
+  public string Name { get; set; } = string.Empty;
 }
 
 class v2Request
 {
-    public string Name { get; set; } = string.Empty;
-    public int Age { get; set; } = 0;
+  public string Name { get; set; } = string.Empty;
+  public int Age { get; set; } = 0;
 }

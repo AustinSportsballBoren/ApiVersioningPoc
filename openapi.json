@@ -1,0 +1,117 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "My API",
+        "description": "API with parameter-based versioning",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/hello-world": {
+            "post": {
+                "summary": "Hello world endpoint.",
+                "description": "Gets a response from a post.",
+                "parameters": [
+                    {
+                        "name": "api-version",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "1",
+                                "2"
+                            ]
+                        },
+                        "description": "API version number (e.g., `1` for v1, `2` for v2)"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/components/schemas/v1Request"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/v2Request"
+                                    }
+                                ]
+                            },
+                            "examples": {
+                                "v1": {
+                                    "value": {
+                                        "name": "John Doe"
+                                    }
+                                },
+                                "v2": {
+                                    "value": {
+                                        "name": "Jane Doe",
+                                        "age": 30
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/v1Request"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/v2Request"
+                                        }
+                                    ]
+                                },
+                                "examples": {
+                                    "v1": {
+                                        "value": {
+                                            "name": "John Doe"
+                                        }
+                                    },
+                                    "v2": {
+                                        "value": {
+                                            "name": "Jane Doe",
+                                            "age": 30
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "v1Request": {
+                "type": "object",
+                "description": "Schema for version 1",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "v2Request": {
+                "type": "object",
+                "description": "Schema for version 2",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "age": {
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
+}
